@@ -1,0 +1,10 @@
+server:
+  port: 3386
+db:
+  dbName: z_blog
+  dbDriver: mysql
+  dbUser: root
+  dbPassword: 123456
+  dbHost: 127.0.0.1
+  dbPort: 32777
+  charset: utf8
