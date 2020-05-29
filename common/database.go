@@ -28,8 +28,9 @@ func InitDb() *gorm.DB {
 
 	db, err := gorm.Open(dbDriver, args)
 	if err != nil {
-		panic("faild error in database" + err.Error())
+		panic("数据库连接失败 ： " + err.Error())
 	}
+	// 禁用复数表名
 	db.SingularTable(true)
 	fmt.Println("数据库连接成功!")
 	return db

@@ -2,8 +2,9 @@ package common
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
 	"os"
+
+	"github.com/spf13/viper"
 )
 
 func InitConfig() {
