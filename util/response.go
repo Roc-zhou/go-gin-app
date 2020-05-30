@@ -15,6 +15,7 @@ func Response(c *gin.Context, httpCode, code int, data gin.H, msg string) {
 		"data": data,
 	})
 }
+
 func Success(c *gin.Context, data gin.H) {
 	Response(c, http.StatusOK, e.SUCCESS, data, e.GetMsg(e.SUCCESS))
 }
