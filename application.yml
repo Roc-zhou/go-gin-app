@@ -1,10 +1,13 @@
 server:
   port: 3386
 db:
-  dbName: z_blog
+  dbName: sql_demo
   dbDriver: mysql
   dbUser: root
   dbPassword: 123456
   dbHost: 127.0.0.1
-  dbPort: 32777
+  dbPort: 55014
   charset: utf8
+redis:
+  host: 127.0.01
+  port: 55000

@@ -15,8 +15,7 @@ func InItRouter() *gin.Engine {
 	{
 		apiv1.GET("/demo", func(c *gin.Context) {
 			util.Success(c, e.GetMsg(c, e.PARAMETER_ERROR))
-			//util.Fail(c)
-			return
+			// util.Fail(c)
 		})
 	}
 
