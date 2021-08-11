@@ -1,8 +1,7 @@
 package routers
 
 import (
-	"roc/go-gin-app/app/e"
-	"roc/go-gin-app/util"
+	"roc/go-gin-app/routers/api/user"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,10 +12,8 @@ func InItRouter() *gin.Engine {
 
 	apiv1 := r.Group("/api/v1")
 	{
-		apiv1.GET("/demo", func(c *gin.Context) {
-			util.Success(c, e.GetMsg(c, e.PARAMETER_ERROR))
-			// util.Fail(c)
-		})
+		apiv1.POST("/user/register", user.UserRegister)
+		apiv1.POST("/user/login", user.UserLogin)
 	}
 
 	return r

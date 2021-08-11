@@ -5,3 +5,7 @@ type User struct {
 	Password string `json:"password"`
 	Phone    string `json:"phone"`
 }
+
+type UserClaims struct {
+	UserId int64
+}
