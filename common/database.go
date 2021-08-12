@@ -3,39 +3,55 @@ package common
 import (
 	"fmt"
 
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
+type Model struct {
+	ID         int `gorm:"primary_key" json:"id"`
+	CreateTime int `json:"create_time"`
+	UpdateTime int `json:"update_time"`
+}
 
-func InitDb() *gorm.DB {
-	dbDriver := viper.GetString("db.dbDriver")
+var _db *gorm.DB
+
+func InitDb() {
+	// dbDriver := viper.GetString("db.dbDriver")
 	dbName := viper.GetString("db.dbName")
 	dbUser := viper.GetString("db.dbUser")
 	dbPassword := viper.GetString("db.dbPassword")
 	dbHost := viper.GetString("db.dbHost")
 	dbPort := viper.GetString("db.dbPort")
 	charset := viper.GetString("db.charset")
+	maxConn := viper.GetInt("db.maxConn") // 最大连接数
+	maxOpen := viper.GetInt("db.maxOpen") // 最大空闲数
 	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
 		dbUser,
 		dbPassword,
 		dbHost,
 		dbPort,
 		dbName,
-		charset) //
-
-	db, err := gorm.Open(dbDriver, args)
+		charset,
+	)
+	fmt.Println(args)
+	var err error
+	_db, err = gorm.Open(mysql.Open(args), &gorm.Config{})
 	if err != nil {
-		panic("数据库连接失败 ： " + err.Error())
+		panic("数据库连接失败： " + err.Error())
 	}
-	// 禁用复数表名
-	db.SingularTable(true)
+
+	// _db.Callback().Create().Replace("gorm:create_time", CreateTimeCallBack)
+
+	sqlDB, err := _db.DB()
+	if err != nil {
+		panic("数据错误： " + err.Error())
+	}
+	sqlDB.SetMaxIdleConns(maxOpen) // 设置空闲连接池中连接的最大数量
+	sqlDB.SetMaxOpenConns(maxConn) // 设置打开数据库连接的最大数量。
 	fmt.Println("数据库连接成功!")
-	return db
 }
 
 func GetDB() *gorm.DB {
-	return DB
+	return _db
 }

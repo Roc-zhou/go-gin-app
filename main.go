@@ -8,21 +8,13 @@ import (
 )
 
 func main() {
-	// 读取配置文件
-	common.InitConfig()
-	// 数据库
-	// db := common.InitDb()
-	// defer db.Close()
-	// var user []model.User
-	// s := db.Find(&user)
-	// fmt.Println(s)
-
+	common.Init()
 	// exp := time.Now().Add(time.Duration(10) * time.Second).Unix() // 当前时间增加24小时
 	// fmt.Println(exp)
 	// customClaims := &module.CustomClaims{
 	// 	UserId: 1,
 	// 	StandardClaims: jwt.StandardClaims{
-	// 		// 签发时间
+	// 签发时间
 	// 		IssuedAt:  time.Now().Unix(),
 	// 		ExpiresAt: exp, // 过期时间，
 	// 	},
