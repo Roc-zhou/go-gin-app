@@ -34,4 +34,5 @@ func main() {
 	initRoutes := routers.InItRouter()
 	port := viper.GetString("server.port")
 	initRoutes.Run(":" + port)
+
 }
