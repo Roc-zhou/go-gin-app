@@ -8,12 +8,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type Model struct {
-	ID         int `gorm:"primary_key" json:"id"`
-	CreateTime int `json:"create_time"`
-	UpdateTime int `json:"update_time"`
-}
-
 var _db *gorm.DB
 
 func InitDb() {

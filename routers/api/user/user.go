@@ -1,34 +1,25 @@
 package user
 
 import (
-	"fmt"
 	"roc/go-gin-app/common"
+	"roc/go-gin-app/model"
 	"roc/go-gin-app/util"
 
+	"github.com/Roc-zhou/go-util-package/encrypt"
 	"github.com/gin-gonic/gin"
 )
 
-type User struct {
-	common.Model
-	Name     string `json:"name"`
-	Password string `json:"password"`
-	Phone    string `json:"phone"`
-}
+const SALT = "asdasdqw"
 
 // 注册
 func UserRegister(c *gin.Context) {
-	json := User{}
+	json := model.User{}
 	c.BindJSON(&json)
-
 	db := common.GetDB()
-	user1 := User{Name: json.Name, Password: json.Password, Phone: json.Phone}
-	fmt.Println(user1)
-	db.Debug().Create(&user1)
-
-	// var user User
-	// s := db.Where("name = ?", "111").First(&user)
-	// fmt.Println(s.RowsAffected)
-
+	user1 := model.User{Name: json.Name, Password: encrypt.Md5(encrypt.Md5(json.Password) + SALT), Phone: json.Phone}
+	if result := db.Debug().Create(&user1); result.Error != nil {
+		panic(result.Error)
+	}
 	util.Success(c, nil)
 }
 

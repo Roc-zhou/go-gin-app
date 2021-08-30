@@ -9,14 +9,14 @@ import (
 
 func main() {
 	common.Init()
+
 	// exp := time.Now().Add(time.Duration(10) * time.Second).Unix() // 当前时间增加24小时
 	// fmt.Println(exp)
 	// customClaims := &module.CustomClaims{
 	// 	UserId: 1,
 	// 	StandardClaims: jwt.StandardClaims{
-	// 签发时间
-	// 		IssuedAt:  time.Now().Unix(),
-	// 		ExpiresAt: exp, // 过期时间，
+	// 		IssuedAt:  time.Now().Unix(), // 签发时间
+	// 		ExpiresAt: exp,               // 过期时间，
 	// 	},
 	// }
 	// token, err := customClaims.GetToken()

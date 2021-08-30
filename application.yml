@@ -6,7 +6,7 @@ db:
   dbUser: root
   dbPassword: 123456
   dbHost: 127.0.0.1
-  dbPort: 55003
+  dbPort: 55001
   charset: utf8
   maxConn: 200
   maxOpen: 10
